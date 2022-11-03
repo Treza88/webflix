@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -43,7 +44,21 @@ public class VideoEntity {
 
     private Calendar dateDeleted;
 
-    @ManyToMany(mappedBy = "videos")
-    private Collection<ProfileEntity> profiles;
+//    @ManyToMany(mappedBy = "videos")  //a été modifier en OneToMany cidessous
+//    private Collection<ProfileEntity> profiles;
+    @OneToMany(mappedBy = "video")
+    private Collection<VideoProfileEntity> profiles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "video_actor",
+            joinColumns = @JoinColumn(name="video_id"),
+            inverseJoinColumns = @JoinColumn(name="actor_id")
+    )
+    private Collection<ActorEntity> actors;
+
+    @ManyToOne(optional = false)
+    private CategoryEntity category;
+
 
 }

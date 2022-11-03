@@ -13,21 +13,25 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="profile")
+@Table(name = "profile")
 public class ProfileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    @Column(length = 20,nullable = false)
+    private Long id;
+
+    @Column(length = 20, nullable = false)
     private String name;
-    @Column(length = 10,nullable = false)
+
+    @Column(length = 10, nullable = false)
     private String language;
+
     @Column(nullable = false)
     private String photo;
-@ManyToOne(optional = false)
+    @ManyToOne(optional = false)
     private UserEntity user;
-@ManyToMany()
-    private Collection<VideoEntity> videos;
+
+    @OneToMany(mappedBy = "video")
+    private Collection<VideoProfileEntity> videos;
 
 
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Admin User</h1>
+<!--table>thead>tr>th*3^^tbody>tr>td*3 +tabulation pour valider-->
+<table border="1">
+    <thead>
+    <tr>
+        <th>Genre</th>
+        <th>Email</th>
+        <th>Mot de passe</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.gender}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.password}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
