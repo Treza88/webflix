@@ -24,4 +24,8 @@ public Optional<UserEntity> finById(Long id){
        return userRepository.findById(id);
 
 }
+
+    public void deleteAll() {
+        userRepository.deleteAll();
+    }
 }

@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Admin User</h1>
+
 <!--table>thead>tr>th*3^^tbody>tr>td*3 +tabulation pour valider-->
-<table border="1">
+<table class="table table-hover" border="1" data-th-if="${users.size()>0}">
     <thead>
     <tr>
-        <th>Genre</th>
-        <th>Email</th>
-        <th>Mot de passe</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mot de passe</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="u : ${users}">
-        <td th:text="${u.gender}"></td>
-        <td th:text="${u.email}"></td>
-        <td th:text="${u.password}"></td>
+    <tr data-th-each="u : ${users}">
+        <td data-th-text="${u.gender}"></td>
+        <td data-th-text="${u.email}"></td>
+        <td data-th-text="${u.password}"></td>
+        <td ><a data-th-href="@{'/admin/users/'+${u.id}}">detail</a> </td>
+        <!--<td ><a th:href="@{'/admin/users/{id}(id=${u.id})}">detail</a> </td>--><!-- Idem ligne au dessus-->
     </tr>
     </tbody>
 </table>
-</body>
-</html>

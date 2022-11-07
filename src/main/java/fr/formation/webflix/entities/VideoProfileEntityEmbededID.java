@@ -16,6 +16,7 @@ public class VideoProfileEntityEmbededID  implements Serializable {
     private static final Long serialVersionUID =1L;
 
     private Long videoId;
+
     private Long profileId;
 
 }

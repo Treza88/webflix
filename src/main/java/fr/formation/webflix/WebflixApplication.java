@@ -7,11 +7,12 @@ import fr.formation.webflix.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Calendar;
 
-@SpringBootApplication
+@SpringBootApplication(exclude={SecurityAutoConfiguration.class})
 public class WebflixApplication {
 @Autowired
 private UserService userService;
@@ -22,10 +23,10 @@ private UserService userService;
 //@Bean
 //	public void saveUser(){
 //	UserEntity user = new UserEntity();
-//	user.setEmail("treza88@hotmail.com");
+//	user.setEmail("treza88@hotmail.fr");
 //	user.setPassword("azer");
-//	user.setFirstname("Hervé");
-//	user.setLastname("Thomesse");
+//	user.setFirstname("RV");
+//	user.setLastname("Thom");
 //	user.setCountry("France");
 //	user.setGender(Gender.MR);
 //	user.setDateCreated(Calendar.getInstance());
@@ -35,7 +36,10 @@ private UserService userService;
 //	userService.save(user);
 //
 //}
-
+@Bean
+	public void deleteAllUser(){
+		userService.deleteAll();
+}
 
 
 

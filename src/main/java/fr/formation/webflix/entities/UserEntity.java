@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -20,10 +24,17 @@ public class UserEntity {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "L'email doit etre rempli. Ex: rv.thom@gmail;fr")
+    @Email(message = "L'email n'est pas formaté correctement") //peut contenir un regex
     private String email;
 
     @Column(nullable = false)
+    @Pattern(regexp = "[a-z0-9\\-_.@&$/]{8,100}",flags = {Pattern.Flag.CASE_INSENSITIVE},
+    message = "Le mot de passe doit comporter au minimum 8 caracteres.")
     private String password;
+
+    @Transient
+    private String confirmPassword;
 
     @Temporal(TemporalType.DATE)
     private Calendar birthday;

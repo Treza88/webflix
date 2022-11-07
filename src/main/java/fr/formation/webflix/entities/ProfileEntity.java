@@ -33,5 +33,4 @@ public class ProfileEntity {
     @OneToMany(mappedBy = "video")
     private Collection<VideoProfileEntity> videos;
 
-
 }
