@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Calendar;
 
-@SpringBootApplication(exclude={SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude={SecurityAutoConfiguration.class})// permet exclure l'application securité
 public class WebflixApplication {
 @Autowired
 private UserService userService;

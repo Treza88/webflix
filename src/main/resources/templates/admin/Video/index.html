@@ -1,0 +1,29 @@
+<!--table>thead>tr>th*3^^tbody>tr>td*3 +tabulation pour valider-->
+<table class="table table-hover" border="1" data-th-if="${videos.size()>0}">
+    <thead>
+    <tr>
+        <th scope="col">Titre</th>
+        <th scope="col">Durée</th>
+        <th scope="col">Pays</th>
+        <th scope="col">Synopsis</th>
+        <th scope="col">URL de la vidéo</th>
+        <th scope="col">Jaquette</th>
+        <th scope="col">Année de production</th>
+        <th scope="col">Categorie</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="v : ${videos}">
+        <td data-th-text="${v.name}"></td>
+        <td data-th-text="${v.duration}"></td>
+        <td data-th-text="${v.originCountry}"></td>
+        <td data-th-text="${v.synopsis}"></td>
+        <td data-th-text="${v.urlVideo}"></td>
+        <td data-th-text="${v.cover}"></td>
+        <td data-th-text="${v.productYear}"></td>
+        <td data-th-text="${v.category.name}"></td>
+        <td ><a data-th-href="@{'/admin/videos/'+${v.id}}">detail</a> </td>
+        <!--<td ><a th:href="@{'/admin/videos/{id}(id=${u.id})}">detail</a> </td>--><!-- Idem ligne au dessus-->
+    </tr>
+    </tbody>
+</table>

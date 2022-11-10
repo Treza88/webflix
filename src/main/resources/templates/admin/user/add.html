@@ -6,7 +6,7 @@
                data-th-field="*{email}"
                placeholder="tartampion.fr"
                required><!--patern avec expression reguliere-->
-        <span data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}">Email Error</span>
+        <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}">Email Error</div>
     </div>
     <div class="mb-3">
         <label data-th-for="password" class="form-label"> Mot de Passe</label>
@@ -20,7 +20,7 @@
         <input class="form-control form-control-lg" type="password"
                data-th-field="*{confirmPassword}"
                placeholder="confirmPassword">
-        <span data-th-if="${#fields.hasErrors('confirmPassword')}" data-th-errors="*{confirmPassword}">Password Error</span>
+        <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('confirmPassword')}" data-th-errors="*{confirmPassword}">Password Error</div>
     </div>
     <div class="mb-3">
         <label data-th-for="gender" class="form-label"> Civilité</label>

@@ -19,4 +19,16 @@ public class CategoryEntity {
     private String name;
     @OneToMany(mappedBy = "category")
     private Collection<VideoEntity> videos;
+
+    public CategoryEntity(Long id) {
+        this.id = id;
+    }
+
+    public Collection<VideoEntity> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Collection<VideoEntity> videos) {
+        this.videos = videos;
+    }
 }

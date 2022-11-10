@@ -1,0 +1,52 @@
+<form action="/admin/videos/add" method="post" data-th-object="${videoEntity}">
+    <div class="mb-3">
+        <label data-th-for="name" class="form-label"> Titre</label>
+        <input class="form-control form-control-lg alert alert-secondary" role="alert" type="text"
+               data-th-field="*{name}"
+               required><!--patern avec expression reguliere-->
+        <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}">Nom Error</div>
+    </div>
+    <div class="mb-3">
+        <label data-th-for="duration" class="form-label"> Durée du film</label>
+        <input class="form-control form-control-lg" type="number"
+               data-th-field="*{duration}"
+               placeholder="duration">
+    </div>
+    <div class="mb-3">
+        <label data-th-for="originCountry" class="form-label">Pays d'origine</label>
+        <input class="form-control form-control-lg" type="text"
+               data-th-field="*{originCountry}"
+               placeholder="originCountry">
+    <div class="mb-3">
+        <label data-th-for="synopsis" class="form-label"> Synopsis</label>
+        <input class="form-control form-control-lg" type="text"
+               data-th-field="*{synopsis}">
+    </div>
+    <div class="mb-3">
+        <label data-th-for="urlVideo" class="form-label"> URL de la Video</label>
+        <input class="form-control form-control-lg" type="text"
+               data-th-field="*{urlVideo}">
+    </div>
+    <div class="mb-3">
+        <label data-th-for="cover" class="form-label"> Jaquette</label>
+        <input class="form-control form-control-lg" type="text"
+               data-th-field="*{cover}">
+    </div>
+        <div class="mb-3">
+            <label data-th-for="productYear" class="form-label"> Année de sortie</label>
+            <input class="form-control form-control-lg" type="month"
+                   data-th-field="*{productYear}">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label data-th-for="category" class="form-label"> Categorie</label>
+        <select class="form-select" aria-label="Disabled select example btn-info" data-th-field="*{category}">
+            <option data-th-each="c : ${cats}" data-th-text="${c.name}" data-th-value="${c.id}"></option>
+            <!-- T(fr.formation.webflix.enums.Gender).values() va directement chercher les valeur dans l'enum gender -->
+        </select>
+    </div>
+    <div class="mb-3">
+        <button class="mb-3 form-control form-control-lg btn btn-primary "type="submit">Valider</button>
+        <button class="mb-3 form-control form-control-lg btn btn-warning" type="submit">Effacer</button>
+    </div>
+</form>

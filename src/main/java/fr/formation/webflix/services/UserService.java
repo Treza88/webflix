@@ -13,17 +13,19 @@ public class UserService {
     @Autowired //
     private UserRepository userRepository;
 
-    public UserEntity save(UserEntity user){
+    public UserEntity save(UserEntity user) {
         return userRepository.save(user);
 
     }
-public Iterable<UserEntity>findAll(){
-        return userRepository.findAll();
-}
-public Optional<UserEntity> finById(Long id){
-       return userRepository.findById(id);
 
-}
+    public Iterable<UserEntity> findAll() {
+        return userRepository.findAll();
+    }
+
+    public Optional<UserEntity> finById(Long id) {
+        return userRepository.findById(id);
+
+    }
 
     public void deleteAll() {
         userRepository.deleteAll();

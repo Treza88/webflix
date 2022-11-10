@@ -1,0 +1,46 @@
+
+
+<form action="/admin/categorys" method="post" data-th-object="${categoryEntity}" >
+    <div class="d-flex align-items-center justify-content-center">
+        <label data-th-for="name" class="form-label" Style="Margin-right: 30px"> Nom de la catégorie à ajouter</label>
+        <input class="form-control " type="text"
+               data-th-field="*{name}"
+               style="width: 100%"
+               required><!--patern avec expression reguliere-->
+        <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}">Nom Error</div>
+
+        <button class="btn btn-primary col-2 ms-3"type="submit">Valider</button>
+<!--        <button class="mb-3 form-control form-control-lg btn btn-warning" type="submit">Effacer</button>-->
+    </div>
+</form>
+
+
+<table class="table table-hover" border="1" data-th-if="${categorys.size()>0}" >
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom de la categorie</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="c : ${categorys}">
+        <td data-th-text="${c.id}"></td>
+        <td data-th-text="${c.name}"></td>
+        <td class="">
+            <div class="align-items-center align-content-center">
+
+                <a href="/admin/cat/1" class="mx-2"><i class="bi bi-eye"
+                                                       style="font-size: 1.5rem;" ></i></a>
+                <a href="/admin/cat/1/update" class="mx-2"><i class="bi bi-pencil-square"
+                                                              style="font-size: 1.5rem;"></i></a>
+
+
+                <a data-th-href="@{'/admin/categorys/'+${c.id}}" class="mx-2"><i class="bi bi-trash-fill"
+                                                              style="font-size: 1.5rem;"></i></a>
+                <div class="alert alert-danger" role="alert" data-th-text="${error}" data-th-if="${error}"></div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

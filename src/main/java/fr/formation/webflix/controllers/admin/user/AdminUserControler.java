@@ -49,26 +49,20 @@ public class AdminUserControler {
         return "admin/index.html";
     }
 
-    //@RequestMapping(value = "/admin/users/add",method = RequestMethod.POST) // idem dessous
-    @PostMapping("add")
 
+    @PostMapping("add")
     public String adminUserAddPost(@Valid UserEntity userEntity, BindingResult bindingResult,
                                    Model model){   // mettre la dependance : "spring-boot-starter-validation" pour utiliser @Valid et BindingResult
         if (!userEntity.getPassword().equals(userEntity.getConfirmPassword())){
             bindingResult.rejectValue("confirmPassword","userEntity.confirmPassword","Les mots de passe ne sont pas identiques");
         }
-
         if (bindingResult.hasErrors()){
             model.addAttribute("page","user/add.html");
             model.addAttribute("title"," - User Add");
             return "admin/index.html";
         }
-
-
         userEntity.setDateCreated(Calendar.getInstance());
         userEntity.setPassword(hash(userEntity.getPassword()));
-
-
         userService.save(userEntity);
         return "redirect:/admin/users";
     }
