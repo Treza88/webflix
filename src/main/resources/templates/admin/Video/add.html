@@ -28,9 +28,15 @@
                data-th-field="*{urlVideo}">
     </div>
     <div class="mb-3">
-        <label data-th-for="cover" class="form-label"> Jaquette</label>
-        <input class="form-control form-control-lg" type="text"
-               data-th-field="*{cover}">
+        <label data-th-for="cover-bin" class="form-label"> Jaquette</label>
+        <input class="form-control form-control-lg" type="file" id="cover-bin" name="cover-bin"
+        accept=".jpg, .jpeg, .png"
+        aria-describedby="url-cover-help">
+        <div id="cover-help"   class="form-text"> formats acceptés : PNG | JPEG | JPG</div>
+        <div class="invalid-feedback">
+            Pas très jolie sans image 🥹
+        </div>
+
     </div>
         <div class="mb-3">
             <label data-th-for="productYear" class="form-label"> Année de sortie</label>

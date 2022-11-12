@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VideoRepository extends CrudRepository<VideoEntity,Long> {// Long = type de la primary key
+
+    Iterable<VideoEntity> findAllByDateDeletedIsNull();
+    //Optional<VideoEntity> findByIdAndDateDeletedIsNull(Long id);
 }

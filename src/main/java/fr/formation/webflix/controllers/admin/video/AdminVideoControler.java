@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -52,6 +52,7 @@ public class AdminVideoControler {
     @GetMapping("add")
     public String adminVideoAdd(VideoEntity videoEntity, Model model) {
         //model.addAttribute("civilite", Gender.values());
+        model.addAttribute("cover-error","");
         model.addAttribute("cats",categoryService.findAll());
         model.addAttribute("page", "video/add.html");
         model.addAttribute("title", " - Video Add");
@@ -60,16 +61,31 @@ public class AdminVideoControler {
     }
     @PostMapping("add")
     public String adminVideoAddPost(@Valid VideoEntity videoEntity, BindingResult bindingResult,
+                                    @RequestParam("cover-bin")MultipartFile coverBin,
                                     Model model) {   // mettre la dependance : "spring-boot-starter-validation" pour utiliser @Valid et BindingResult
-        model.addAttribute("videos", videoService.findAll());
-        model.addAttribute("cats",categoryService.findAll());
+
+
+       // model.addAttribute("videos", videoService.findAll());
+       // model.addAttribute("cats",categoryService.findAll());
+
+        if (bindingResult.hasErrors()) {
+            return adminVideoAdd(videoEntity, model);
+        }
+
+        try{                                     //Users\Hervé\IdeaProjects\webflix\src\main\resources\static\files
+            coverBin.transferTo(new File("Users/Hervé/IdeaProjects/webflix/src/main/resources/static/files/" + coverBin.getOriginalFilename()));
+        } catch (IOException i) {
+            model.addAttribute("cover-error","Une erreur c'est produite lors du transfert");
+            return adminVideoAdd(videoEntity, model);
+        }
         //videoEntity.setCategory(new CategoryEntity(1L));
         videoEntity.setDatePublished(Calendar.getInstance());
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("page", "video/index.html");
-            model.addAttribute("title", " - Video Add");
-            return "admin/index.html";
-        }
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("page", "video/index.html");
+//            model.addAttribute("title", " - Video Add");
+//            return "admin/index.html";
+//        }
+        videoEntity.setCover(coverBin.getOriginalFilename());
         videoService.save(videoEntity);
         return "redirect:/admin/videos";
     }

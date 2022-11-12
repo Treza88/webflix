@@ -36,5 +36,7 @@ public class VideoService {
         videoRepository.deleteById(id);
     }
 
-
+    public Iterable<VideoEntity> findAllByDateDeletedIsNull() {
+        return videoRepository.findAllByDateDeletedIsNull();
+    }
 }
