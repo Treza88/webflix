@@ -19,27 +19,27 @@ private UserService userService;
 	public static void main(String[] args) {
 
 		SpringApplication.run(WebflixApplication.class, args);
-	}
-//@Bean
+		}
+//	@Bean
 //	public void saveUser(){
-//	UserEntity user = new UserEntity();
-//	user.setEmail("treza88@hotmail.fr");
-//	user.setPassword("azer");
-//	user.setFirstname("RV");
-//	user.setLastname("Thom");
-//	user.setCountry("France");
-//	user.setGender(Gender.MR);
-//	user.setDateCreated(Calendar.getInstance());
+//		UserEntity user = new UserEntity();
+//		user.setEmail("treza88@hotmail.fr");
+//		user.setPassword("azer");
+//		user.setFirstname("RV");
+//		user.setLastname("Thom");
+//		user.setCountry("France");
+//		user.setGender(Gender.MR);
+//		user.setDateCreated(Calendar.getInstance());
 //
-//	System.out.println(user);
+//		System.out.println(user);
 //
-//	userService.save(user);
-//
+//		 userService.save(user);
+//	}
+
+//@Bean
+//	public void deleteAllUser(){
+//		userService.deleteAll();
 //}
-@Bean
-	public void deleteAllUser(){
-		userService.deleteAll();
-}
 
 
 

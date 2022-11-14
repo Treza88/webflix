@@ -1,4 +1,4 @@
-<form action="/admin/videos/add" method="post" data-th-object="${videoEntity}">
+<form action="/admin/videos/add" method="post" data-th-object="${videoEntity}" enctype="multipart/form-data">
     <div class="mb-3">
         <label data-th-for="name" class="form-label"> Titre</label>
         <input class="form-control form-control-lg alert alert-secondary" role="alert" type="text"
@@ -23,15 +23,17 @@
                data-th-field="*{synopsis}">
     </div>
     <div class="mb-3">
-        <label data-th-for="urlVideo" class="form-label"> URL de la Video</label>
-        <input class="form-control form-control-lg" type="text"
-               data-th-field="*{urlVideo}">
+        <label data-th-for="video-bin" class="form-label"> URL de la Video</label>
+        <input class="form-control form-control-lg" type="file" id="video-bin" name="video-bin"
+               accept="video/*" aria-describedby="url-video-help">
+        <div id="video-help" class=""form-text>formats accepté : AVI | MKV | AVCHD |  WebM</div>
+        <div class="invalid-feedback">Tu pourrais au moins penser a mettre une vidéo avant d'envoyer</div>
+
     </div>
     <div class="mb-3">
-        <label data-th-for="cover-bin" class="form-label"> Jaquette</label>
+        <label data-th-for="cover-bin" class="form-label"> Jaquettes</label>
         <input class="form-control form-control-lg" type="file" id="cover-bin" name="cover-bin"
-        accept=".jpg, .jpeg, .png"
-        aria-describedby="url-cover-help">
+        accept=".jpg, .jpeg, .png" aria-describedby="url-cover-help">
         <div id="cover-help"   class="form-text"> formats acceptés : PNG | JPEG | JPG</div>
         <div class="invalid-feedback">
             Pas très jolie sans image 🥹

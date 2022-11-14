@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -61,6 +63,7 @@ public class AdminVideoControler {
     }
     @PostMapping("add")
     public String adminVideoAddPost(@Valid VideoEntity videoEntity, BindingResult bindingResult,
+                                    @RequestParam("video-bin") MultipartFile videoBin,
                                     @RequestParam("cover-bin")MultipartFile coverBin,
                                     Model model) {   // mettre la dependance : "spring-boot-starter-validation" pour utiliser @Valid et BindingResult
 
@@ -71,9 +74,18 @@ public class AdminVideoControler {
         if (bindingResult.hasErrors()) {
             return adminVideoAdd(videoEntity, model);
         }
+        Path pathV = Paths.get("src/main/resources/static/files/" + videoBin.getOriginalFilename()).toAbsolutePath();
+        try{
+            videoBin.transferTo(new File(pathV.toFile().toURI()));
+        } catch (IOException i) {
+            model.addAttribute("video-error","Une erreur c'est produite lors du transfert");
+            return adminVideoAdd(videoEntity, model);
+        }
 
+
+        Path pathC = Paths.get("src/main/resources/static/files/" + coverBin.getOriginalFilename()).toAbsolutePath();
         try{                                     //Users\Hervé\IdeaProjects\webflix\src\main\resources\static\files
-            coverBin.transferTo(new File("Users/Hervé/IdeaProjects/webflix/src/main/resources/static/files/" + coverBin.getOriginalFilename()));
+            coverBin.transferTo(new File(pathC.toFile().toURI()));
         } catch (IOException i) {
             model.addAttribute("cover-error","Une erreur c'est produite lors du transfert");
             return adminVideoAdd(videoEntity, model);
@@ -85,6 +97,7 @@ public class AdminVideoControler {
 //            model.addAttribute("title", " - Video Add");
 //            return "admin/index.html";
 //        }
+        videoEntity.setUrlVideo(videoBin.getOriginalFilename());
         videoEntity.setCover(coverBin.getOriginalFilename());
         videoService.save(videoEntity);
         return "redirect:/admin/videos";

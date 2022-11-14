@@ -3,6 +3,7 @@
     <thead>
     <tr>
         <th scope="col">Titre</th>
+        <th scope="col" class="col-1">Cover</th>
         <th scope="col">Durée</th>
         <th scope="col">Pays</th>
         <th scope="col">Synopsis</th>
@@ -15,6 +16,8 @@
     <tbody>
     <tr data-th-each="v : ${videos}">
         <td data-th-text="${v.name}"></td>
+        <td><img class="img-thumbnail" data-th-src="|/files/${v.cover}|" alt=""
+                 width="100"></td>
         <td data-th-text="${v.duration}"></td>
         <td data-th-text="${v.originCountry}"></td>
         <td data-th-text="${v.synopsis}"></td>
