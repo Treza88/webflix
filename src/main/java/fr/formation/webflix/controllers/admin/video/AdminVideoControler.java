@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -42,12 +43,14 @@ public class AdminVideoControler {
     }
 
     @RequestMapping("{id}")
-    public String adminVideoDetail(@PathVariable("id") Long videoId, Model model) {
+    public String adminVideoDetail(@PathVariable("id") Long videoId, RedirectAttributes redirectAttributes, Model model) {
         Optional<VideoEntity> video = videoService.findById(videoId);
         if (video.isPresent()) {
             model.addAttribute("v", video.get());
-            return "admin/video/detail";
+            model.addAttribute("page","video/detail");
+            return "admin/index";
         }
+        redirectAttributes.addFlashAttribute("error","Pas de vidéo avec cet id");
         return "error_404.html";
 
     }

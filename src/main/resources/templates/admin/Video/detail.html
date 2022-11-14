@@ -1,1 +1,50 @@
 <h1>detail video</h1>
+
+<div class="container d-flex">
+
+
+    <div class="col-4 my-5">
+        <img data-th-src="|/files/${v.cover}|" alt="" class="img-fluid">
+    </div>
+    <div class="col-1"></div>
+    <div class="col-7">
+        <div>
+            <div class="my-5">
+                <video style="width: 100%;height: auto" data-th-src="|/files/${v.urlVideo}|" autoplay loop controls></video>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Titre</div>
+                <div data-th-text="${v.name}"></div>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Durée</div>
+                <div data-th-text="${v.duration}"></div>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Origine</div>
+                <div data-th-text="${v.originCountry}"></div>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Date de production</div>
+                <div  data-th-text="${v.productYear}"></div>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Synopsis</div>
+                <div style="text-align: right"  data-th-text="${v.synopsis}"></div>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Date de publication</div>
+                <div data-th-text="${#calendars.format(v.datePublished, 'dd-MM-yyyy')}"></div>
+            </div>
+            <div class="row-perso d-flex flex-wrap justify-content-between">
+                <div>Date de suppresion</div>
+                <div data-th-text="${#calendars.format(v.dateDeleted, 'dd-MM-yyyy')}"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
