@@ -17,7 +17,7 @@ public class ApiVideoControler {
     @GetMapping("/api/videos") // pour du JSON
     @CrossOrigin("*")
     public Iterable<VideoEntity> indexVideo(){
-        return videoService.findAll();
+        return videoService.findAllByDateDeletedIsNull();
     }
 
     @PostMapping(value = "/api/videos", consumes = {"application/json"}) // pour du JSON
@@ -27,7 +27,7 @@ public class ApiVideoControler {
 
     @GetMapping("/api/videos/{id}")
     public VideoEntity findOne(@PathVariable Long id) throws Exception {
-        return videoService.findById(id).orElseThrow(()-> new Exception("Video non trouvé"));
+        return videoService.findByIdAndDateDeletedIsNull(id).orElseThrow(()-> new Exception("Video non trouvé"));
     }
 
     @PutMapping("/api/videos/{id}")
@@ -45,13 +45,13 @@ public class ApiVideoControler {
             return videoService.save(video);
         })
                 .orElseGet(()->{
-            videoEntity.setId(id);
+           // videoEntity.setId(id);  /supprimmer mais sans savoir pourquoi
         return videoService.save(videoEntity);
         });
     }
 
     @DeleteMapping("/api/videos/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         videoService.deleteById(id);
         String msg = """
                 {

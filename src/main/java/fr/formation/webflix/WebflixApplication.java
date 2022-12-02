@@ -8,19 +8,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Calendar;
 
 @SpringBootApplication(exclude={SecurityAutoConfiguration.class})// permet exclure l'application securité
-public class WebflixApplication {
+public class WebflixApplication extends SpringBootServletInitializer {
 @Autowired
 private UserService userService;
 	public static void main(String[] args) {
 
 		SpringApplication.run(WebflixApplication.class, args);
 		}
-//	@Bean
+
+		@GetMapping("/")
+		public String getHello(){
+		return  "Hello moi";
+		}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(WebflixApplication.class);
+	}
+
+	//	@Bean
 //	public void saveUser(){
 //		UserEntity user = new UserEntity();
 //		user.setEmail("treza88@hotmail.fr");
