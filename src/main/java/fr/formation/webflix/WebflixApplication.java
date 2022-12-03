@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Calendar;
 
 @SpringBootApplication(exclude={SecurityAutoConfiguration.class})// permet exclure l'application securité
-public class WebflixApplication extends SpringBootServletInitializer {
+public class WebflixApplication  extends SpringBootServletInitializer {
 @Autowired
 private UserService userService;
 	public static void main(String[] args) {
